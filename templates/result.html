@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result | LinkShield</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo-box">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="LinkShield Logo" class="logo-img">
+            <span class="logo-text">LinkShield</span>
+        </div>
+    </nav>
+
+    <!-- Browser Window -->
+    <div class="browser-window">
+        <div class="browser-header">
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+            <div class="browser-url-bar">LinkShield.com/result</div>
+        </div>
+        
+        <!-- Result Content -->
+        <div class="result-content">
+            {% if status == 'blocked' %}
+            <!-- BLOCKED RESULT -->
+            <div class="result-card danger">
+                <div class="result-icon">
+                    <i class="fas fa-shield-alt"></i>
+                    <div class="icon-badge">
+                        <i class="fas fa-ban"></i>
+                    </div>
+                </div>
+                <h2>Access Blocked</h2>
+                <p class="result-text">This website is identified as <strong>FAKE / PHISHING</strong>.</p>
+                
+                <div class="url-display">
+                    <i class="fas fa-link"></i>
+                    <span>{{ url }}</span>
+                </div>
+
+                <p class="result-subtext">
+                    Access is blocked to protect your personal information.
+                </p>
+
+                <div class="result-actions">
+                    <a href="/" class="btn btn-outline">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </a>
+                    <a href="/" class="btn btn-primary">
+                        Try Another URL
+                    </a>
+                </div>
+            </div>
+
+            {% else %}
+            <!-- SAFE RESULT -->
+            <div class="result-card success">
+                <div class="result-icon">
+                    <i class="fas fa-shield-alt"></i>
+                    <div class="icon-badge">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+                <h2>Website Appears Safe</h2>
+                <p class="result-text">No match found in the fake URL blacklist.</p>
+                
+                <div class="url-display">
+                    <i class="fas fa-link"></i>
+                    <span>{{ url }}</span>
+                </div>
+
+                <p class="result-subtext">
+                    You may proceed at your own discretion.
+                </p>
+
+                <div class="result-actions">
+                    <a href="{{ url }}" target="_blank" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i> Proceed to Website
+                    </a>
+                    <a href="/" class="btn btn-outline">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 LinkShield | Web-Based Fake URL Blocker System</p>
+    </footer>
+</body>
+</html>

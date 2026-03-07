@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkShield | Secure URL Gateway</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo-box">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="LinkShield Logo" class="logo-img">
+            <span class="logo-text">LinkShield</span>
+        </div>
+    </nav>
+
+    <!-- Browser Window -->
+    <div class="browser-window">
+        <div class="browser-header">
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+            <div class="browser-url-bar">LinkShield.com</div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="hero">
+            <div class="logo-container">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L4 5V11.09C4 16.14 7.41 20.85 12 22C16.59 20.85 20 16.14 20 11.09V5L12 2Z" fill="url(#paint0_linear)"/>
+                    <path d="M12 8V14M12 18H12.01" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                        <linearGradient id="paint0_linear" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#3B82F6"/>
+                            <stop offset="1" stop-color="#10B981"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1 class="logo-large">
+                    <span>Link</span><span>Shield</span>
+                </h1>
+            </div>
+            
+            <h2>Secure Your Web Access</h2>
+            <p>We protect users from fake and phishing websites</p>
+
+            <form class="url-form" action="/check" method="post" onsubmit="showLoader()">
+                <input type="text" name="url" class="url-input" placeholder="https://example.com" required>
+                <button type="submit" class="check-button">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Check URL</span>
+                </button>
+            </form>
+
+            <!-- Loader animation -->
+            <div class="loader" id="loader"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 LinkShield | Web-Based Fake URL Blocker System</p>
+    </footer>
+
+    <script>
+    function showLoader() {
+        document.getElementById("loader").style.display = "block";
+    }
+    </script>
+</script>
+
+</body>
+</html>
