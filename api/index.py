@@ -1,16 +1,19 @@
 import sys
 import os
+
+# Add the parent directory to Python path
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from app import app
 
 # Vercel serverless function handler
-handler = app
+def handler(environ, start_response):
+    """WSGI handler for Vercel serverless functions"""
+    return app(environ, start_response)
 
-# For Vercel deployment, we need to export the app as a WSGI app
-def handler(request):
-    return app(request.environ, start_response)
+# Export the handler for Vercel
+app.handler = handler
 
-# For Vercel deployment, we need to export the app
+# For local development
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

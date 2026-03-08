@@ -49,12 +49,23 @@ def load_blacklist() -> Set[str]:
         current_dir = os.path.dirname(os.path.abspath(__file__))
         blacklist_path = os.path.join(current_dir, 'blacklist.json')
         
+        print(f"Attempting to load blacklist from: {blacklist_path}")
+        
+        if not os.path.exists(blacklist_path):
+            print(f"Blacklist file not found at: {blacklist_path}")
+            return set()
+        
         with open(blacklist_path, 'r', encoding='utf-8') as file:
-            urls = json.load(file)['fake_urls']
+            data = json.load(file)
+            urls = data.get('fake_urls', [])
             # Normalize all blacklisted URLs and remove duplicates
-            return {normalize_url(url) for url in urls if url.strip()}
+            result = {normalize_url(url) for url in urls if url.strip()}
+            print(f"Successfully loaded {len(result)} URLs from blacklist")
+            return result
     except Exception as e:
         print(f"Error loading blacklist: {e}")
+        import traceback
+        traceback.print_exc()
         return set()
 
 def is_blacklisted(url: str, blacklist: Set[str]) -> bool:
