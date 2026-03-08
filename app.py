@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import json
+import os
 from urllib.parse import urlparse, urlunparse
 from typing import List, Set, Tuple
 import re
@@ -44,7 +45,11 @@ def normalize_url(url: str) -> str:
 def load_blacklist() -> Set[str]:
     """Load and normalize blacklisted URLs."""
     try:
-        with open('blacklist.json', 'r', encoding='utf-8') as file:
+        # Use absolute path for serverless environment
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        blacklist_path = os.path.join(current_dir, 'blacklist.json')
+        
+        with open(blacklist_path, 'r', encoding='utf-8') as file:
             urls = json.load(file)['fake_urls']
             # Normalize all blacklisted URLs and remove duplicates
             return {normalize_url(url) for url in urls if url.strip()}
