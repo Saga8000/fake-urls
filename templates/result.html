@@ -100,5 +100,20 @@
     <footer>
         <p>© 2026 LinkShield | Web-Based Fake URL Blocker System</p>
     </footer>
+    
+    <!-- Vercel Analytics -->
+    <script>
+      (function(w,d,s,o,f,js,fjs){
+        w['jsObject']=o;w[o]=w[o]||function(){
+        (w[o].q=w[o].q||[]).push(arguments)};w[o].l=1*new Date();
+        js=d.createElement(s),fjs=d.getElementsByTagName(s)[0];
+        js.async=1;js.src=f;fjs.parentNode.insertBefore(js,fjs);
+      })(window,document,'script','_analytics','https://vercel-analytics.vercel.app/_analytics.js');
+      
+      _analytics('config', {
+        'path': window.location.pathname,
+        'enableCookie': false
+      });
+    </script>
 </body>
 </html>
